@@ -17,3 +17,13 @@ services:
     volumes:
       - .:/home/src/
     restart: on-failure:5
+  db:
+    image: postgres:16.6
+    restart: always
+    env_file: .env
+    ports:
+      - ${POSTGRES_PORT}:5432
+    volumes:
+      - backend:/var/lib/postgresql/data
+volumes:
+  backend:

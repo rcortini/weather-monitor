@@ -20,8 +20,32 @@ blocks:
   uuid: openweather_location_weather_extract
 - all_upstream_blocks_executed: true
   color: null
+  configuration:
+    data_provider: postgres
+    data_provider_profile: default
+    dbt: {}
+    disable_query_preprocessing: false
+    export_write_policy: append
+    limit: 1000
+    use_raw_sql: true
+  downstream_blocks:
+  - openweather_loocation_weather_load
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: sql
+  name: openweather_location_weather_db_create
+  retry_config: null
+  status: executed
+  timeout: null
+  type: custom
+  upstream_blocks: []
+  uuid: openweather_location_weather_db_create
+- all_upstream_blocks_executed: true
+  color: null
   configuration: {}
-  downstream_blocks: []
+  downstream_blocks:
+  - openweather_loocation_weather_load
   executor_config: null
   executor_type: local_python
   has_callback: false
@@ -34,6 +58,23 @@ blocks:
   upstream_blocks:
   - openweather_location_weather_extract
   uuid: openweather_location_weather_transform
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: openweather_loocation_weather_load
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_exporter
+  upstream_blocks:
+  - openweather_location_weather_db_create
+  - openweather_location_weather_transform
+  uuid: openweather_loocation_weather_load
 cache_block_output_in_memory: false
 callbacks: []
 concurrency_config: {}

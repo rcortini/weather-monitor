@@ -1,5 +1,6 @@
 from datetime import datetime, timezone
 import pytz
+import pandas as pd
 
 if 'transformer' not in globals():
     from mage_ai.data_preparation.decorators import transformer
@@ -32,7 +33,17 @@ def transform(data, *args, **kwargs):
     # Format datetime as an ISO 8601 string with timezone information
     formatted_time_with_tz = local_time.isoformat()
 
-    return formatted_time_with_tz
+    return pd.DataFrame([{
+        'obs_time': formatted_time_with_tz,
+        'latitude': kwargs['LAT'],
+        'longitude': kwargs['LON'],
+        'temperature': data['main']['temp'],
+        'humidity': data['main']['humidity'],
+        'pressure': data['main']['pressure'],
+        'weather' : data['weather'],
+        'wind_speed' : data['wind']['speed'],
+        'wind_deg' : data['wind']['deg'],
+        }])
 
 
 @test
