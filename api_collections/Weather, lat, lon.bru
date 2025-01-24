@@ -1,0 +1,32 @@
+meta {
+  name: Weather, lat, lon
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{baseURL}}/2.5/weather?lat={{lat}}&lon={{lon}}&appid={{API_TOKEN}}
+  body: none
+  auth: none
+}
+
+params:query {
+  lat: {{lat}}
+  lon: {{lon}}
+  appid: {{API_TOKEN}}
+}
+
+vars:pre-request {
+  lat: 41.38170333573912
+  lon: 2.1598416942032017
+}
+
+docs {
+  # Weather at a lat, lon
+  This request fetches the data from the [Weather API](https://openweathermap.org/current).
+  
+  Required parameters:
+  - `lat`: Latitude
+  - `lon`: Longitude
+  - `appid`: the API key with a (free for 1000 calls/day) subscription.
+}
