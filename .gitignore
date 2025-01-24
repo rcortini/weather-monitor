@@ -1,0 +1,20 @@
+data
+docs
+trash
+figures
+*ipynb_checkpoints
+*.pyc
+*.class
+*.png
+
+# ignore a few notebooks
+notebooks/Scratch.ipynb
+notebooks/Trash.ipynb
+
+# data files
+mage_ai/server/data/files/**
+default_repo
+instance_metadata.json
+mage_data
+
+.env
